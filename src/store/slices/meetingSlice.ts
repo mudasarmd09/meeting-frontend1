@@ -24,8 +24,7 @@ export const fetchMeetings = createAsyncThunk(
   'meetings/fetchMeetings',
   async (_, thunkAPI) => {
     try {
-      const res = await api.get('/meetings', {
-      });
+      const res = await api.get('/meetings');
       return res.data;
     } catch (err: any) {
       return thunkAPI.rejectWithValue('Failed to fetch meetings');
