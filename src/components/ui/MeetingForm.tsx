@@ -19,9 +19,9 @@ export function MeetingForm({
   onCancel,
   submitLabel = "Save",
 }: Props) {
-  const [title, setTitle] = useState(initial.title || "");
-  const [description, setDescription] = useState(initial.description || "");
-  const [date, setDate] = useState(initial.date || "");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
