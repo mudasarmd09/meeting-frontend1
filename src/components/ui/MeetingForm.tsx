@@ -38,9 +38,13 @@ export function MeetingForm({
     setError("");
     setIsLoading(true);
     try {
-      await onSubmit({ title, description, date });
+      await onSubmit({ title, description, date});
     } finally {
       setIsLoading(false);
+      setTitle("");
+      setDescription("");
+      setDate("");
+
     }
   };
 
