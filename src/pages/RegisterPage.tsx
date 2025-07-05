@@ -4,7 +4,7 @@ import api from "@/utils/axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const RegisterPage = () => {
@@ -12,6 +12,8 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("admin123");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -22,7 +24,7 @@ const RegisterPage = () => {
     try {
       await api.post("/auth/register", { email, password });
       navigate("/login");
-    } catch (err:any) {
+    } catch (err: any) {
       setError(err?.response?.data?.message || "Registration failed");
     } finally {
       setIsLoading(false);
@@ -48,13 +50,24 @@ const RegisterPage = () => {
               required
             />
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
+            >
+              {showPassword ? (
+                <EyeOff className="w-5 h-5" />
+              ) : (
+                <Eye className="w-5 h-5" />
+              )}
+            </Button>
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? (
                 <>
